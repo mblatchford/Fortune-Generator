@@ -11,20 +11,32 @@ body {
     justify-content: center;
     height: 100%;
 }
-/* body > * {
-    outline: 1px solid fuchsia;
-} */
-.quoteDisplay {
-    padding: 20px 0 0 0;
+.outerbox{
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
     text-align: center;
-    height: 200px;
-    font-size: 24px;
 }
 
 .buttonContainer {
     text-align: center;
+    padding-bottom: 20px;
 }
 
-h1 {
-text-align: center;
+.quoteDisplay {
+    display:flex;
+    align-items: center;
+    padding: 20px 0 0 0;
+    text-align: center;
+    height: 100%;
+    font-size: 24px;
+    outline: 1px dotted white;
+}
+
+
+img {
+    height: 250px;
+    width: 250px;
 }

@@ -2,26 +2,27 @@
 
 const triggerElement = document.querySelector('[data-trigger]');
 const triggerElement2 = document.querySelector('[data-trigger2]');
-const outputElement = document.querySelector('[data-output]');
-/* fortune arrays */
+const outputElement = document.querySelector('[data-image]');
+/* img fortune arrays */
 
-let fortunesCpy = [];
-let moreFortunesCpy = [];
+let imgFortunesCpy = [];
+/* let imgMoreFortunesCpy = {};      
+ */
+let imgFortunes = [{img:"https://s3.scoopwhoop.com/anj/wdkusd/56e77205-7614-4eac-a80f-4131113db56a.jpg"},
+{img:"https://s4.scoopwhoop.com/anj/wdkusd/1e0f91f0-dfa6-4634-bd45-ea48b3b2f67e.jpg"},
+{img:"https://s4.scoopwhoop.com/anj/wdkusd/c47ebb95-250c-449c-a2a2-ab60acb1e329.jpg"},
+{img:"https://s4.scoopwhoop.com/anj/wdkusd/5f3a1870-8451-491c-8ef0-e863af289e11.jpg"},
+{img:"https://s4.scoopwhoop.com/anj/wdkusd/8aa41648-457e-4abe-9669-b633d054fc1c.jpg"},
+]
 
-const fortunes = ["You're as useless as the 'ueue' in 'queue'.",
-    "Mirrors can't talk. Lucky for you, they can't laugh either.", 
-    "Hey, you have something on your chin...No the third one down.", 
-    "You're the reason the gene pool needs a lifeguard.", 
-    "So a thought crossed your mind? Must have been a long and lonely journey."];  
-
-const moreFortunes = [
-    "If I wanted to kill myself I'd climb up your ego and jump to your IQ.",
-    "Someday you'll go far...and I hope you stay there.", 
-    "I'd agree with you but then we'd both be wrong.",
-    "If I had a dollar for every time you said something smart, I'd be broke.",
-    "I love what you've done with your hair. How do you get it to come out of your nose like that?"       
-]        
-
+/* let imgMoreFortunes = [{img:"https://s3.scoopwhoop.com/anj/wdkusd/56e77205-7614-4eac-a80f-4131113db56a.jpg"},
+{img: "https://s3.scoopwhoop.com/anj/wdkusd/ddcb1e77-e70a-454f-b1f7-6b051df9e985.jpg"},
+{img: "https://s4.scoopwhoop.com/anj/wdkusd/7f37bd7c-3622-466b-bfd1-7d4f86bcb21d.jpg"},
+{img: "https://s4.scoopwhoop.com/anj/wdkusd/fa5bda61-d3da-458d-9504-4ddd5a2bb852.jpg"},
+{img: "https://s3.scoopwhoop.com/anj/wdkusd/a704292a-e4ef-4ec9-907f-1d216951b3ef.jpg"},
+{img: "https://s4.scoopwhoop.com/anj/wdkusd/098c2b6e-65ba-4f0e-a502-1708277f8fab.jpg"}     
+]  
+ */
 function shuffle(original) {
         let array = [...original];
         let i = array.length,
@@ -41,30 +42,62 @@ function shuffle(original) {
 
 
 triggerElement.addEventListener('click', function () {
-    fortunesCpy = fortuneText (fortunesCpy, fortunes);
+    /* debugger */
+    imgFortunesCpy = fortuneImg (imgFortunesCpy, imgFortunes);
+    console.table(imgFortunesCpy);
 });
-
+/* 
 
 triggerElement2.addEventListener('click', function () {
-       moreFortunesCpy = fortuneText (moreFortunesCpy, moreFortunes);
-});
+       imgMoreFortunesCpy = fortuneImg (imgMoreFortunesCpy, imgMoreFortunes);
+}); */
 
 
-function fortuneText (array, toCopy){
+/* I can add the text version back into the object to use as the alt info */
+/* function show_image(src, width, height, alt) {
+    let img = document.createElement("img");
+    img.src = src;
+    img.width = width;
+    img.height = height;
+    img.alt = alt;
+
+    document.body.appendChild(img);
+
+} */
+
+function changeImage(newImg)
+{
+    let newSrc = newImg.img;
+    let curImg = document.getElementsByTagName("img");
+    curImg.setAttribute("src", `${newSrc}`);	
+}
+
+function fortuneImg (array, toCopy){
     /* check if empty array */
+    console.log(array);
+    /* debugger */
     if (array.length === 0) {
         /* if empty reassign array to a new shuffled version of original */
         array = shuffle(toCopy);
-        /* print out one value */
-        outputElement.textContent = array.pop();
+        console.table(array);
+        debugger
+        let using = array.pop();
+        // let src = using['img'];    
+        // outputElement.imgContent = show_image(src, 250, 250, "testing");
+        outputElement.imgContent = changeImage(using);
+
         /* return current state of array so data persists across multiple clicks */
         return array;
 
     }else{
     /* if fortunes left in array print one */
-    outputElement.textContent = array.pop();
+    let using = array.pop();
+    // let src = using['img'];    
+    // outputElement.imgContent = show_image(src, 250, 250, "testing");
+    outputElement.imgContent = changeImage(using);
     /* return current state of array so data persists across multiple clicks */
     return array;
 
     }
 }
+
