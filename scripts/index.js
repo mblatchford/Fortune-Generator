@@ -6,8 +6,8 @@ const outputElement = document.querySelector('[data-image]');
 /* img fortune arrays */
 
 let imgFortunesCpy = [];
-/* let imgMoreFortunesCpy = {};      
- */
+let imgMoreFortunesCpy = [];      
+
 let imgFortunes = [{img:"https://s3.scoopwhoop.com/anj/wdkusd/56e77205-7614-4eac-a80f-4131113db56a.jpg"},
 {img:"https://s4.scoopwhoop.com/anj/wdkusd/1e0f91f0-dfa6-4634-bd45-ea48b3b2f67e.jpg"},
 {img:"https://s4.scoopwhoop.com/anj/wdkusd/c47ebb95-250c-449c-a2a2-ab60acb1e329.jpg"},
@@ -15,14 +15,14 @@ let imgFortunes = [{img:"https://s3.scoopwhoop.com/anj/wdkusd/56e77205-7614-4eac
 {img:"https://s4.scoopwhoop.com/anj/wdkusd/8aa41648-457e-4abe-9669-b633d054fc1c.jpg"},
 ]
 
-/* let imgMoreFortunes = [{img:"https://s3.scoopwhoop.com/anj/wdkusd/56e77205-7614-4eac-a80f-4131113db56a.jpg"},
+let imgMoreFortunes = [{img:"https://s3.scoopwhoop.com/anj/wdkusd/56e77205-7614-4eac-a80f-4131113db56a.jpg"},
 {img: "https://s3.scoopwhoop.com/anj/wdkusd/ddcb1e77-e70a-454f-b1f7-6b051df9e985.jpg"},
 {img: "https://s4.scoopwhoop.com/anj/wdkusd/7f37bd7c-3622-466b-bfd1-7d4f86bcb21d.jpg"},
 {img: "https://s4.scoopwhoop.com/anj/wdkusd/fa5bda61-d3da-458d-9504-4ddd5a2bb852.jpg"},
 {img: "https://s3.scoopwhoop.com/anj/wdkusd/a704292a-e4ef-4ec9-907f-1d216951b3ef.jpg"},
 {img: "https://s4.scoopwhoop.com/anj/wdkusd/098c2b6e-65ba-4f0e-a502-1708277f8fab.jpg"}     
 ]  
- */
+
 function shuffle(original) {
         let array = [...original];
         let i = array.length,
@@ -40,64 +40,34 @@ function shuffle(original) {
 }
 
 
-
 triggerElement.addEventListener('click', function () {
-    /* debugger */
     imgFortunesCpy = fortuneImg (imgFortunesCpy, imgFortunes);
-    console.table(imgFortunesCpy);
 });
-/* 
+
 
 triggerElement2.addEventListener('click', function () {
        imgMoreFortunesCpy = fortuneImg (imgMoreFortunesCpy, imgMoreFortunes);
-}); */
+});
 
-
-/* I can add the text version back into the object to use as the alt info */
-/* function show_image(src, width, height, alt) {
-    let img = document.createElement("img");
-    img.src = src;
-    img.width = width;
-    img.height = height;
-    img.alt = alt;
-
-    document.body.appendChild(img);
-
-} */
-
-function changeImage(newImg)
-{
-    let newSrc = newImg.img;
-    let curImg = document.getElementsByTagName("img");
-    curImg.setAttribute("src", `${newSrc}`);	
-}
 
 function fortuneImg (array, toCopy){
     /* check if empty array */
     console.log(array);
-    /* debugger */
     if (array.length === 0) {
         /* if empty reassign array to a new shuffled version of original */
         array = shuffle(toCopy);
         console.table(array);
-        debugger
         let using = array.pop();
-        // let src = using['img'];    
-        // outputElement.imgContent = show_image(src, 250, 250, "testing");
-        outputElement.imgContent = changeImage(using);
-
+        outputElement.src = using.img;
         /* return current state of array so data persists across multiple clicks */
         return array;
 
     }else{
-    /* if fortunes left in array print one */
-    let using = array.pop();
-    // let src = using['img'];    
-    // outputElement.imgContent = show_image(src, 250, 250, "testing");
-    outputElement.imgContent = changeImage(using);
-    /* return current state of array so data persists across multiple clicks */
-    return array;
-
+        /* if fortunes left in array print one */
+        let using = array.pop();
+        outputElement.src = using.img;
+        /* return current state of array so data persists across multiple clicks */
+        return array;
     }
 }
 
